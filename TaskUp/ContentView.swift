@@ -22,9 +22,7 @@ struct ContentView: View {
                     if page == pages.last {
                         Button("Get Start", action: goToZero)
                             .bold()
-                           // .foregroundColor(Color("Primary"))
-                           // .offset(x:150, y:55)
-//                            .buttonStyle(.bordered)
+                            .frame(width: 150, height: 25)
                             .foregroundColor(Color("Secondary"))
                             .padding(.vertical, 12)
                             .padding(.horizontal)

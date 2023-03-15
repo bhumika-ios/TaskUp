@@ -40,7 +40,7 @@ struct Page: Identifiable, Equatable {
             name: "TaskUp",
             description: "Step By Step Process",
             imageUrl: "Task4",
-            tag: 1
+            tag: 2
         ),
     ]
     
