@@ -140,7 +140,11 @@ func TaskRowView(task: Task)->some View{
                     .font(.title3.bold())
                     .foregroundColor(.black)
                     .padding(.vertical,1)
-                
+                    .onTapGesture {
+                        taskModel.editTask = task
+                        taskModel.openEditTask = true
+                        taskModel.setupTask()
+                    }
              //   Spacer()
                 
                 //            if !task.isCompleted {
