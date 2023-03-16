@@ -73,7 +73,6 @@
 				AC59433229C0888B00BD9AF9 /* Persistence.swift */,
 				AC59433429C0888B00BD9AF9 /* TaskUp.xcdatamodeld */,
 				AC59432F29C0888B00BD9AF9 /* Preview Content */,
-				ACCF7E4E29C1E5A300CDFABB /* LaunchScreenView.swift */,
 			);
 			path = TaskUp;
 			sourceTree = "<group>";
@@ -92,6 +91,7 @@
 				ACA8F69B29C1ABE500B0F1E3 /* MainView.swift */,
 				ACA8F69D29C1AC0900B0F1E3 /* AddNewTask.swift */,
 				ACA8F69F29C1AC2200B0F1E3 /* DynamicFilterView.swift */,
+				ACCF7E4E29C1E5A300CDFABB /* LaunchScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
