@@ -103,19 +103,25 @@ func TaskRowView(task: Task)->some View{
         HStack{
             Text(task.type ?? "")
                 .font(.callout)
-                .padding(.vertical,5)
-                .padding(.horizontal)
+                .padding(6)
+                //.padding(.horizontal)
            
                 .background{
                     if task.type == "Basic"{
-                    Capsule()
-                        .fill(Color("Green").opacity(0.7))
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color("Green"))
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color("Green").opacity(0.3))
                     }else if task.type == "Important"{
-                        Capsule()
-                            .fill(Color("Yellow").opacity(0.7))
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color("Yellow"))
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color("Yellow").opacity(0.3))
                     }else{
-                        Capsule()
-                            .fill(Color("Red").opacity(0.7))
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color("Red"))
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color("Red").opacity(0.3))
                     }
             }
             Spacer()
@@ -161,35 +167,41 @@ func TaskRowView(task: Task)->some View{
             .frame(maxWidth: .infinity, alignment: .leading)
           //  .padding(.vertical,-10)
             //&& taskModel.currentTab != "Failed Task"
-            if !task.isCompleted {
-                Button{
-//                        MARK: updating Coredata
-                    task.isCompleted = true
-                  
-                    try? env.managedObjectContext.save()
-                } label: {
-                    Circle()
-                        .strokeBorder(.black,lineWidth: 1.5)
-                        .frame(width: 20, height: 20)
-                        .contentShape(Circle())
-                }
+           // if !task.isCompleted {
+                Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
+                    .onTapGesture {
+                        
+                            task.isCompleted.toggle()
+                        
+                 //   }
+//                Button{
+////                        MARK: updating Coredata
+//                    task.isCompleted = true
+//
+//                    try? env.managedObjectContext.save()
+//                } label: {
+//                    Circle()
+//                        .strokeBorder(.black,lineWidth: 1.5)
+//                        .frame(width: 20, height: 20)
+//                      //  .contentShape(Circle())
+//                }
             }
-            if task.isCompleted {
-                Button{
-//                        MARK: updating Coredata
-                    task.isCompleted = false
-                  
-                    try? env.managedObjectContext.save()
-                } label: {
-                    Circle()
-                        .strokeBorder(.black,lineWidth: 1.5)
-                        .frame(width: 20, height: 20)
-                        .contentShape(Circle())
-                }
-     
-                
-                
-            }
+//            if task.isCompleted {
+//                Button{
+////                        MARK: updating Coredata
+//                    task.isCompleted = false
+//
+//                    try? env.managedObjectContext.save()
+//                } label: {
+//                    Circle()
+//                        .strokeBorder(.black,lineWidth: 1.5)
+//                        .frame(width: 20, height: 20)
+//                       // .contentShape(Circle())
+//                }
+//
+//
+//
+//            }
                
         }
         .padding(.vertical,-10)
@@ -198,16 +210,30 @@ func TaskRowView(task: Task)->some View{
     .padding()
     .frame(maxWidth: .infinity)
     .background{
-        RoundedRectangle(cornerRadius: 12, style: .continuous)
-            .fill(Color(task.color ?? "Yellow").opacity(0.3))
-    }
+        if task.type == "Basic"{
+//        RoundedRectangle(cornerRadius: 5)
+//            .stroke(Color("Green"))
+        RoundedRectangle(cornerRadius: 5)
+            .fill(Color("Green").opacity(0.2))
+        }else if task.type == "Important"{
+//            RoundedRectangle(cornerRadius: 5)
+//                .stroke(Color("Yellow"))
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color("Yellow").opacity(0.2))
+        }else{
+//            RoundedRectangle(cornerRadius: 5)
+//                .stroke(Color("Green"))
+            RoundedRectangle(cornerRadius: 5)
+                .fill(Color("Red").opacity(0.2))
+        }
+}
 }
 //MARK: Custom Segmented Bar
 @ViewBuilder
 func CustomSegmentedBar()->some View{
     let tabs = ["Today", "Upcoming", "Task Done", "Failed Task"]// In case missed card
     VStack(alignment: .leading){
-        HStack(spacing: 20){
+        HStack(spacing: 2){
             ForEach(tabs,id: \.self){tab in
                 Text(tab)
                     .font(.callout)
@@ -215,10 +241,11 @@ func CustomSegmentedBar()->some View{
                     .scaleEffect(0.9)
                     .foregroundColor(taskModel.currentTab == tab ? .white: .black)
                 // .padding(.horizontal,1)
-                    .padding(.vertical,6)
+                    .padding(6)
+                    
                     .background{
                         if taskModel.currentTab == tab{
-                            Capsule()
+                            RoundedRectangle(cornerRadius: 5)
                                 .fill(.black)
                             
                                 .matchedGeometryEffect(id: "TAB", in: animation)
@@ -235,6 +262,8 @@ func CustomSegmentedBar()->some View{
                 }
             }
         }
+    .background(Color("Secondary"))
+    .scaledToFit()
     }
 }
 

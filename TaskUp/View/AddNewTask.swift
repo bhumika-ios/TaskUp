@@ -43,40 +43,40 @@ struct AddNewTask: View {
                         .opacity(taskModel.editTask == nil ? 0 : 1)
                         }
                     
-                    VStack(alignment: .leading, spacing: 12){
-                        Text("Task Color")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
-                        //MARK:simple card colors
-                        let colors: [String] = ["Yellow", "Green", "Blue","Purple", "Red", "Orange","Pink","Sky","Till"]
-                        HStack(spacing: 15){
-                            ForEach(colors,id: \.self){ color in
-                                Circle()
-                                    .fill(Color(color))
-                                    .frame(width: 25, height: 25)
-                                    .background{
-                                        if taskModel.taskColor == color{
-                                            Circle()
-                                                .strokeBorder(.gray)
-                                                .padding(-3)
-                                        }
-                                    }
-                                    .contentShape(Circle())
-                                    .onTapGesture {
-                                        taskModel.taskColor = color
-                                    }
-                                
-                            }
-                            
-                        
-                        
-                    }
-                        .padding(.top,10)
-            }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top,30)
-            Divider() // vertical line used
+//                    VStack(alignment: .leading, spacing: 12){
+//                        Text("Task Color")
+//                            .font(.caption)
+//                            .foregroundColor(.gray)
+//
+//                        //MARK:simple card colors
+//                        let colors: [String] = ["Yellow", "Green", "Blue","Purple", "Red", "Orange","Pink","Sky","Till"]
+//                        HStack(spacing: 15){
+//                            ForEach(colors,id: \.self){ color in
+//                                Circle()
+//                                    .fill(Color(color))
+//                                    .frame(width: 25, height: 25)
+//                                    .background{
+//                                        if taskModel.taskColor == color{
+//                                            Circle()
+//                                                .strokeBorder(.gray)
+//                                                .padding(-3)
+//                                        }
+//                                    }
+//                                    .contentShape(Circle())
+//                                    .onTapGesture {
+//                                        taskModel.taskColor = color
+//                                    }
+//
+//                            }
+//
+//
+//
+//                    }
+//                        .padding(.top,10)
+//            }
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.top,30)
+//            Divider() // vertical line used
                 .padding(.vertical,10)
             VStack(alignment: .leading, spacing: 12){
                 Text("Task DeadLine")
@@ -112,7 +112,7 @@ struct AddNewTask: View {
             Divider()
             
             // MARK: sample TaskType
-            let taskTypes: [String] = ["Basic", "Urgent", "Important"]
+            let taskTypes: [String] = ["Basic", "Important", "Urgent"]
             VStack(alignment: .leading, spacing: 12){
                     Text("TaskType")
                         .font(.caption)
@@ -132,6 +132,7 @@ struct AddNewTask: View {
                                     }else{
                                         Capsule()
                                             .strokeBorder(.black)
+                                            
                                     }
                                 }
                             // animation effect

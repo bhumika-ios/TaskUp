@@ -60,7 +60,7 @@ struct DynamicFilteredView<Content: View,T>:View where T: NSManagedObject {
                 Text("No tasks found!!!")
                     .font(.system(size: 16))
                     .fontWeight(.light)
-                    .offset(y: 100)
+                    .offset(y: 220)
             }else{
                 ForEach(request,id: \.objectID){Object in
                     self.content(Object)
