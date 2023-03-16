@@ -61,9 +61,12 @@ ScrollView(.vertical, showsIndicators: false){
                 Image(systemName: "plus.app.fill")
             }
             .foregroundColor(.white)
-            .padding(.vertical, 12)
-            .padding(.horizontal)
-            .background(.black, in: Capsule())
+            //.padding(.vertical, 12)
+            .padding(6)
+            .background{
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(.black)
+            }
             
         }
         //MARK:Linear GradientBG
@@ -101,53 +104,55 @@ func TaskView()->some View{
 func TaskRowView(task: Task)->some View{
     VStack(alignment: .leading, spacing: 10){
         HStack{
-            Text(task.type ?? "")
-                .font(.callout)
-                .padding(6)
-                //.padding(.horizontal)
-           
-                .background{
-                    if task.type == "Basic"{
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color("Green"))
-                    RoundedRectangle(cornerRadius: 5)
-                        .fill(Color("Green").opacity(0.3))
-                    }else if task.type == "Important"{
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color("Yellow"))
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color("Yellow").opacity(0.3))
-                    }else{
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color("Red"))
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color("Red").opacity(0.3))
-                    }
-            }
-            Spacer()
+            //            Text(task.type ?? "")
+            //                .font(.callout)
+            //                .padding(6)
+            //                //.padding(.horizontal)
+            //
+            //                .background{
+            //                    if task.type == "Basic"{
+            //                    RoundedRectangle(cornerRadius: 5)
+            //                        .stroke(Color("Green"))
+            //                    RoundedRectangle(cornerRadius: 5)
+            //                        .fill(Color("Green").opacity(0.3))
+            //                    }else if task.type == "Important"{
+            //                        RoundedRectangle(cornerRadius: 5)
+            //                            .stroke(Color("Yellow"))
+            //                        RoundedRectangle(cornerRadius: 5)
+            //                            .fill(Color("Yellow").opacity(0.3))
+            //                    }else{
+            //                        RoundedRectangle(cornerRadius: 5)
+            //                            .stroke(Color("Red"))
+            //                        RoundedRectangle(cornerRadius: 5)
+            //                            .fill(Color("Red").opacity(0.3))
+            //                    }
+            //            }
             
-//                MARK:  Edit button only for noncomleted task
+            
+            //                MARK:  Edit button only for noncomleted task
             //&& taskModel.currentTab != "Failed Task"
-            if !task.isCompleted {
-                Button{
-                    taskModel.editTask = task
-                    taskModel.openEditTask = true
-                    taskModel.setupTask()
-                }label: {
-                    Image(systemName: "square.and.pencil")
-                        .foregroundColor(.black)
-                }
-            }
             
-        }
-        .padding(.vertical,-10)
-        Text(task.title ?? "")
-            .font(.title3.bold())
-            .foregroundColor(.black)
-            .padding(.vertical,5)
-        
-        HStack(alignment: .bottom, spacing: 0){
-            VStack(alignment: .leading, spacing: 10){
+            
+            //        }
+            
+            VStack(alignment: .leading){
+                Text(task.title ?? "")
+                    .font(.title3.bold())
+                    .foregroundColor(.black)
+                    .padding(.vertical,1)
+                
+             //   Spacer()
+                
+                //            if !task.isCompleted {
+                //                Button{
+                //                    taskModel.editTask = task
+                //                    taskModel.openEditTask = true
+                //                    taskModel.setupTask()
+                //                }label: {
+                //                    Image(systemName: "square.and.pencil")
+                //                        .foregroundColor(.black)
+                //                }
+                //            }
                 HStack{
                     Label {
                         Text((task.deadline ?? Date()).formatted(date: .long, time: .omitted))
@@ -164,52 +169,63 @@ func TaskRowView(task: Task)->some View{
                     .font(.caption)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-          //  .padding(.vertical,-10)
-            //&& taskModel.currentTab != "Failed Task"
-           // if !task.isCompleted {
-                Image(systemName: task.isCompleted ? "checkmark.circle" : "circle")
-                    .onTapGesture {
-                        
-                            task.isCompleted.toggle()
-                        
-                 //   }
-//                Button{
-////                        MARK: updating Coredata
-//                    task.isCompleted = true
-//
-//                    try? env.managedObjectContext.save()
-//                } label: {
-//                    Circle()
-//                        .strokeBorder(.black,lineWidth: 1.5)
-//                        .frame(width: 20, height: 20)
-//                      //  .contentShape(Circle())
-//                }
-            }
-//            if task.isCompleted {
-//                Button{
-////                        MARK: updating Coredata
-//                    task.isCompleted = false
-//
-//                    try? env.managedObjectContext.save()
-//                } label: {
-//                    Circle()
-//                        .strokeBorder(.black,lineWidth: 1.5)
-//                        .frame(width: 20, height: 20)
-//                       // .contentShape(Circle())
-//                }
-//
-//
-//
-//            }
+            //.padding()
+             .padding(.vertical,1)
+           // HStack(alignment: .bottom, spacing: 0){
+             //   VStack(alignment: .leading, spacing: 10){
+                   
+            //    }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                //  .padding(.vertical,-10)
+                //&& taskModel.currentTab != "Failed Task"
+                // if !task.isCompleted {
                
+                //            if task.isCompleted {
+                //                Button{
+                ////                        MARK: updating Coredata
+                //                    task.isCompleted = false
+                //
+                //                    try? env.managedObjectContext.save()
+                //                } label: {
+                //                    Circle()
+                //                        .strokeBorder(.black,lineWidth: 1.5)
+                //                        .frame(width: 20, height: 20)
+                //                       // .contentShape(Circle())
+                //                }
+                //
+                //
+                //
+                //            }
+                
+           // }
+            .padding(.vertical,-10)
+            Image(systemName: task.isCompleted ? "checkmark.square" : "square")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .onTapGesture {
+                    
+                    task.isCompleted.toggle()
+                    
+                    //   }
+                    //                Button{
+                    ////                        MARK: updating Coredata
+                    //                    task.isCompleted = true
+                    //
+                    //                    try? env.managedObjectContext.save()
+                    //                } label: {
+                    //                    Circle()
+                    //                        .strokeBorder(.black,lineWidth: 1.5)
+                    //                        .frame(width: 20, height: 20)
+                    //                      //  .contentShape(Circle())
+                    //                }
+                }
         }
-        .padding(.vertical,-10)
-        
     }
     .padding()
     .frame(maxWidth: .infinity)
     .background{
+//        RoundedRectangle(cornerRadius: 5)
+//            .fill(.gray).opacity(0.1)
         if task.type == "Basic"{
 //        RoundedRectangle(cornerRadius: 5)
 //            .stroke(Color("Green"))

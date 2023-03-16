@@ -23,6 +23,7 @@ struct DynamicFilteredView<Content: View,T>:View where T: NSManagedObject {
             let tommorow = calendar.date(byAdding: .day, value: 1, to: today)!
             
             // Filter key
+            //let sortByDate = NSSortDescriptor(key: #keyPath(.taskDate), ascending: false)
             
             let filterKey = "deadline"
             
@@ -49,7 +50,7 @@ struct DynamicFilteredView<Content: View,T>:View where T: NSManagedObject {
             predicate = NSPredicate(format: " isCompleted == %i", argumentArray: [1])
         }
         
-        _request = FetchRequest(entity: T.entity(), sortDescriptors: [.init(keyPath: \Task.deadline, ascending: false)], predicate: predicate)
+        _request = FetchRequest(entity: T.entity(), sortDescriptors: [.init(keyPath: \Task.deadline, ascending: true)], predicate: predicate)
         self.content = content
         
         
